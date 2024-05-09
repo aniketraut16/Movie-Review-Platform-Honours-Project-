@@ -4,9 +4,8 @@ const {
   fetchAllReviews,
   fetchOneReview,
   fetchAllReviewsOfUser,
-} = require("../controller/FetchingControllers");
-const { addReview } = require("../controller/AddControllers");
-const { userAuth } = require("../middlewares/userauth");
+} = require("../Controller/FetchingControllers");
+const { userAuth } = require("../Middlewares/userauthentication");
 
 router.get("/getAllReviews", fetchAllReviews);
 router.get("/user/getAllReviews", userAuth, fetchAllReviewsOfUser);
