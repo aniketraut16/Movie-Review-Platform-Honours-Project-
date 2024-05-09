@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
+const { createAdmin } = require("./Controllers/AddControllers"); // Import the createAdmin function
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -9,21 +10,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 require("dotenv").config();
 
-// MongoDB Atlas connection URI
+const AdminRoutes = require("./Routes/AdminRoutes");
+const UserRoutes = require("./Routes/UserRoutes");
+const ReviewRoutes = require("./Routes/ReviewRoutes");
+
 const url = process.env.MONGODB_URL;
 
-// Connect to MongoDB Atlas using Mongoose
 mongoose.connect(url);
 
-// Get the default connection
 const db = mongoose.connection;
 
-// Bind connection to error event (to get notification of connection errors)
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", () => {
+db.once("open", async () => {
   console.log("Connected to MongoDB Atlas");
-});
 
-app.listen(5000, () => {
-  console.log("Listening on port 5000");
+  await createAdmin("admin", "adminpassword");
+
+  app.use(AdminRoutes);
+  app.use(UserRoutes);
+  app.use(ReviewRoutes);
+
+  app.listen(5000, () => {
+    console.log("Listening on port 5000");
+  });
 });

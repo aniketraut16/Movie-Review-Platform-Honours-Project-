@@ -1,5 +1,6 @@
 const { User } = require("../Models/User");
 const { Review } = require("../Models/Review");
+const { Admin } = require("../Models/Admin");
 const addReview = async (req, res) => {
   try {
     // Get the user ID from the authentication middleware
@@ -36,4 +37,31 @@ const addReview = async (req, res) => {
   }
 };
 
-module.exports = { addReview };
+const createAdmin = async (username, password) => {
+  try {
+    // Check if an admin with the given username already exists
+    const existingAdmin = await Admin.findOne({ username });
+
+    if (existingAdmin) {
+      throw new Error("Admin already exists");
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the admin user
+    const admin = new Admin({
+      username,
+      password: hashedPassword,
+    });
+
+    // Save the admin user to the database
+    await admin.save();
+
+    console.log("Admin created successfully");
+  } catch (error) {
+    console.error("Error creating admin:", error.message);
+  }
+};
+
+module.exports = { addReview, createAdmin };
