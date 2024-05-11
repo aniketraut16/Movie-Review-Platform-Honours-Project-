@@ -30,7 +30,7 @@ db.once("open", async () => {
   app.use(UserRoutes);
   app.use(ReviewRoutes);
 
-  app.listen(5000, () => {
+  app.listen(8080, () => {
     console.log("Listening on port 5000");
   });
 });

@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Admin } = require("../models/AdminModel");
-const { Review } = require("../models/ReviewModel");
-const { User } = require("../models/UserModel");
+const { Admin } = require("../Models/Admin");
+const { Review } = require("../Models/Review");
+const { User } = require("../Models/User");
 
 const fetchAllReviews = async (req, res) => {
   try {

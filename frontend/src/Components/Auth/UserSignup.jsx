@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function UserSignup() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
+  const history = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmedPasswordVisible, setIsConfirmedPasswordVisible] =
     useState(false);
@@ -34,7 +36,7 @@ function UserSignup() {
     setIsConfirmedPasswordVisible((prevState) => !prevState);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       password !== "" &&
@@ -42,13 +44,29 @@ function UserSignup() {
       username !== "" &&
       password === confirmedPassword
     ) {
-      // Handle form submission logic here
-      console.log("Form submitted:", { name, username, password });
+      try {
+        const response = await axios.post("http://localhost:8080/user/signin", {
+          name,
+          username,
+          password,
+        });
+
+        if (!response.data.token) {
+          alert("Error, Please try Again");
+          return;
+        }
+
+        // Save token to local storage
+        localStorage.setItem("token", response.data.token);
+
+        // Redirect to home route
+        history("/");
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       // Handle validation errors or mismatched passwords
-      console.log(
-        "Please provide all required fields and ensure passwords match."
-      );
+      alert("Please provide all required fields and ensure passwords match.");
     }
   };
 
