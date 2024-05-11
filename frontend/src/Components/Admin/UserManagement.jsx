@@ -17,20 +17,29 @@ function UserManagement() {
         return;
       }
 
-      // Include token in the headers of the GET request
+      // Prompt the user for confirmation before deleting
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this user?"
+      );
+      if (!confirmDelete) {
+        return; // If user cancels deletion, exit the function
+      }
+
+      // Include token in the headers of the DELETE request
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-      const res = axios.delete(
+      const res = await axios.delete(
         `http://localhost:8080/deleteUser/${id}`,
         config
       );
-      alert("User Deleted Succesfully");
+      alert("User Deleted Successfully");
+      fetchAllUser();
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to delete User . Please try again later.");
+      alert("Failed to delete User. Please try again later.");
     }
   };
 
