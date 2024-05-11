@@ -22,7 +22,6 @@ function Menubar() {
           <i className="fa-solid fa-user"></i>
         </Link>
       </div>
-      ;
     </>
   );
 }
