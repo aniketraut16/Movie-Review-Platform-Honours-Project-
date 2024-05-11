@@ -4,7 +4,7 @@ function Menubar() {
   return (
     <>
       <Outlet />
-      <div>Menubar</div>;
+      <div id="menubar"></div>;
     </>
   );
 }

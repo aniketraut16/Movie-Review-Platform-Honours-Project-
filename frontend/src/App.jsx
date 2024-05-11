@@ -27,7 +27,7 @@ function App() {
 
           {/* Authentication Paths */}
           <Route path="/user/login" element={<UserLogin />} />
-          <Route path="user/signup" element={<UserSignup />} />
+          <Route path="/user/signup" element={<UserSignup />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* AdminPanel Paths */}
