@@ -20,17 +20,17 @@ const fetchOneReview = async (req, res) => {
     const ReviewId = req.params.id; // Assuming the Review ID is passed in the request URL
 
     // Find the Review by ID
-    const Review = await Review.findById(ReviewId).populate(
+    const Reviews = await Review.findById(ReviewId).populate(
       "uploader",
       "username name"
     );
 
-    if (!Review) {
+    if (!Reviews) {
       return res.status(404).json({ message: "Review not found." });
     }
 
     // If the Review is found, send it to the client
-    return res.status(200).json({ Review });
+    return res.status(200).json({ Reviews });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error." });
@@ -84,13 +84,15 @@ const userdata = async (req, res) => {
   try {
     const username = req.username;
 
-    // Find the user based on the username
     const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    return res.status(200).json(user);
+
+    const reviews = await Review.find({ uploader: user._id });
+
+    return res.status(200).json({ user, reviews });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });

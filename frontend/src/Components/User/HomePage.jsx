@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 function HomePage() {
   const [reviewList, setreviewList] = useState([]);
@@ -19,13 +18,13 @@ function HomePage() {
   const OnePost = () => {
     return reviewList.map((review, index) => {
       return (
-        <Link className="card" key={index}>
+        <div className="card" key={index}>
           <div className="body">
             <h1>{review.title}</h1>
             <p className="text">{review.content}</p>
             <span class="username">from: @{review.uploader.username}</span>
           </div>
-        </Link>
+        </div>
       );
     });
   };
@@ -35,7 +34,6 @@ function HomePage() {
   }
   return (
     <>
-      <nav>Movie Reviews</nav>
       <div id="HomePage">{OnePost()}</div>;
     </>
   );

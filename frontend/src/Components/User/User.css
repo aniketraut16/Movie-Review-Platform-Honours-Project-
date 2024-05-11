@@ -73,8 +73,17 @@ body {
 
 /* HOME PAGE */
 
+nav a {
+  margin-left: auto;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  text-decoration: none;
+}
 nav {
-  width: 100%;
+  width: calc(100% -40px);
   font-size: 30px;
   margin-bottom: 20px;
   height: 10vh;
@@ -82,7 +91,7 @@ nav {
   align-items: center;
   background-color: black;
   color: white;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .card h1 {
@@ -128,4 +137,20 @@ nav {
   font-weight: 400;
   line-height: 1.5;
   margin-bottom: 4px;
+}
+
+.usercard {
+  width: 95%;
+  background-color: gray;
+  margin: 10px auto;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#UseProfile > h1 {
+  width: 100%;
+  padding: 10px 0%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
 }
