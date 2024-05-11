@@ -5,6 +5,7 @@ const {
   fetchAllUsers,
   userdata,
 } = require("../Controllers/FetchingControllers");
+const { deleteUser } = require("../Controllers/DeleteControllers");
 const { userAuth } = require("../Middlewares/userauthentication");
 
 const { adminAuth } = require("../Middlewares/adminauthentication");
@@ -15,5 +16,6 @@ router.post("/user/login", userLogin);
 router.get("/getAllUsers", adminAuth, fetchAllUsers);
 
 router.get("/fetchuser", userAuth, userdata);
+router.delete("/deleteUser/:id", adminAuth, deleteUser);
 
 module.exports = router;

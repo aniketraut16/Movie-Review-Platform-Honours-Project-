@@ -26,3 +26,30 @@
   color: black;
   border-radius: 14px;
 }
+
+#UserManagement {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+#UserManagement > div:first-child {
+  font-weight: bold;
+}
+#UserManagement > div {
+  width: 95%;
+  margin: 2px auto;
+  gap: 5px;
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+}
+
+.userdel {
+  background-color: rgb(246, 60, 60);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}

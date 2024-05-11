@@ -12,13 +12,13 @@ const adminAuth = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const admin = await Admin.findOne({ username: decoded.username });
+    const admin = await Admin.findOne({ _id: decoded.adminId });
 
     if (!admin) {
       return res.status(401).json({ error: "Admin not found" });
     }
 
-    req.username = decoded.username;
+    req.username = admin.username;
     next();
   } catch (error) {
     return res.status(401).json({ error: "Invalid token" });
