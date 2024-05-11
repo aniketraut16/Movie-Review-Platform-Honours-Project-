@@ -24,7 +24,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", async () => {
   console.log("Connected to MongoDB Atlas");
 
-  await createAdmin("admin", "adminpassword");
+  await createAdmin("admin", "admin#123");
 
   app.use(AdminRoutes);
   app.use(UserRoutes);
